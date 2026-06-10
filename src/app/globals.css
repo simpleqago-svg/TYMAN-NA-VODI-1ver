@@ -1,0 +1,193 @@
+@import "tailwindcss";
+
+:root {
+  --background: #0a0908;
+  --foreground: #e6e2da;
+  --muted: #8f8a83;
+  --muted-foreground: #8f8a83;
+  --surface: #111010;
+  --surface-elevated: #161514;
+  --brand-green: #2d4540;
+  --brand-green-light: #3a554e;
+  --brand-green-dim: rgba(45, 69, 64, 0.07);
+  --brand-burgundy: #5c3d47;
+  --brand-burgundy-light: #6e4a56;
+  --brand-burgundy-dim: rgba(92, 61, 71, 0.07);
+  --accent: #c4b8a8;
+  --accent-dim: rgba(196, 184, 168, 0.06);
+  --border: rgba(230, 226, 218, 0.09);
+  --border-green: rgba(230, 226, 218, 0.09);
+  --overlay: rgba(10, 9, 8, 0.86);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-surface: var(--surface);
+  --color-surface-elevated: var(--surface-elevated);
+  --color-brand-green: var(--brand-green);
+  --color-brand-green-light: var(--brand-green-light);
+  --color-brand-green-dim: var(--brand-green-dim);
+  --color-brand-burgundy: var(--brand-burgundy);
+  --color-brand-burgundy-light: var(--brand-burgundy-light);
+  --color-brand-burgundy-dim: var(--brand-burgundy-dim);
+  --color-accent: var(--accent);
+  --color-accent-dim: var(--accent-dim);
+  --color-border: var(--border);
+  --color-border-green: var(--border-green);
+  --color-gold: var(--accent);
+  --color-gold-light: var(--accent);
+  --color-gold-dim: var(--accent-dim);
+  --font-display: var(--font-cormorant);
+  --font-body: var(--font-onest);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-onest), system-ui, sans-serif;
+}
+
+::selection {
+  background: rgba(196, 184, 168, 0.22);
+  color: var(--foreground);
+}
+
+.grain {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  opacity: 0.018;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes hero-zoom {
+  from {
+    transform: scale(1.05);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+.animate-fade-up {
+  animation: fade-up 1s ease-out both;
+}
+
+.animate-hero-zoom {
+  animation: hero-zoom 16s ease-out forwards;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .animate-fade-up,
+  .animate-hero-zoom {
+    animation: none;
+  }
+}
+
+.section-label {
+  font-size: 0.65rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--muted) 88%, var(--foreground));
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.875rem 1.625rem;
+  border-radius: 0;
+  border: 1px solid color-mix(in srgb, var(--foreground) 28%, transparent);
+  background: transparent;
+  color: var(--foreground);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  transition:
+    background 0.35s ease,
+    border-color 0.35s ease,
+    color 0.35s ease;
+}
+
+.btn-primary:hover {
+  background: color-mix(in srgb, var(--foreground) 92%, transparent);
+  border-color: transparent;
+  color: var(--background);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.875rem 1.625rem;
+  border-radius: 0;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: color-mix(in srgb, var(--foreground) 72%, var(--muted));
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transition:
+    color 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.btn-secondary:hover {
+  color: var(--foreground);
+  border-color: color-mix(in srgb, var(--foreground) 22%, transparent);
+}
+
+.card-surface {
+  background: var(--surface-elevated);
+  border: 1px solid var(--border);
+}
+
+.divide-minimal > * + * {
+  border-top: 1px solid var(--border);
+}
