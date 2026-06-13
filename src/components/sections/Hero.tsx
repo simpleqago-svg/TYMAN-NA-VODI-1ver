@@ -5,8 +5,8 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import AnimatedTextCycle from "@/components/ui/animated-text-cycle";
 import { HookahSmokeBackground } from "@/components/ui/animated-shader-hero";
-import { SectionCta } from "@/components/ui/SectionCta";
-import { heroCycleWords, heroSlides, sectionActions } from "@/lib/content";
+import { BookCtaSlot } from "@/components/booking/BookTableCta";
+import { heroCycleWords, heroSlides } from "@/lib/content";
 import { easeInOutSmooth, staggerContainer } from "@/lib/motion";
 
 const SLIDE_INTERVAL = 5500;
@@ -15,7 +15,7 @@ export function Hero() {
   const [activeIndex, setActiveIndex] = useState(0);
 
   return (
-    <section className="relative flex min-h-[100svh] items-end overflow-hidden bg-background">
+    <section id="hero" className="relative flex min-h-[100svh] items-end overflow-hidden bg-background">
       <div className="absolute inset-0">
         {heroSlides.map((slide, index) => {
           const isActive = index === activeIndex;
@@ -114,11 +114,7 @@ export function Hero() {
             }}
             className="mt-12"
           >
-            <SectionCta
-              href={sectionActions.hero.href}
-              label={sectionActions.hero.label}
-              variant="secondary"
-            />
+            <BookCtaSlot variant="hero" />
           </motion.div>
         </motion.div>
       </div>

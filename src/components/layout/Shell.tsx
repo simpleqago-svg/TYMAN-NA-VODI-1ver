@@ -2,13 +2,8 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { AnimatePresence, motion } from "framer-motion";
 import { siteConfig } from "@/lib/site-config";
-import { BookButton } from "@/components/booking/BookButton";
-import { useBooking } from "@/components/booking/BookingProvider";
-import { useFloatingBookCta } from "@/components/booking/useFloatingBookCta";
 import { Reveal } from "@/components/ui/Reveal";
-import { springSmooth } from "@/lib/motion";
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
@@ -54,37 +49,9 @@ export function Header() {
   );
 }
 
-export function StickyBooking() {
-  const { isOpen } = useBooking();
-  const showFloating = useFloatingBookCta(isOpen);
-
-  return (
-    <AnimatePresence>
-      {showFloating ? (
-        <motion.div
-          key="floating-book-cta"
-          initial={{ opacity: 0, y: 20, scale: 0.94, filter: "blur(6px)" }}
-          animate={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
-          exit={{ opacity: 0, y: 14, scale: 0.96, filter: "blur(4px)" }}
-          transition={springSmooth}
-          className="floating-book-cta pointer-events-none fixed z-40 bottom-[max(1.25rem,env(safe-area-inset-bottom))] right-5 sm:right-7 md:bottom-7 md:right-10 lg:right-14"
-          aria-label="Быстрое бронирование"
-        >
-          <BookButton
-            floating
-            className="btn-primary pointer-events-auto min-w-[210px] px-5 py-3 text-[0.68rem] sm:min-w-[230px] md:min-w-[250px]"
-          >
-            Забронировать стол
-          </BookButton>
-        </motion.div>
-      ) : null}
-    </AnimatePresence>
-  );
-}
-
 export function Footer() {
   return (
-    <footer id="contacts" className="section-shell section-tone-light section-continues pb-28 md:pb-24">
+    <footer id="contacts" className="section-shell section-tone-light pb-28 md:pb-24">
       <div className="mx-auto grid max-w-6xl gap-16 px-5 py-20 md:grid-cols-2 md:px-8">
         <Reveal>
           <div>

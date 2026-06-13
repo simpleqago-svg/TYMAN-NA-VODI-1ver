@@ -27,7 +27,7 @@ function reviewGridClass(index: number) {
 
 export function ReviewsSection() {
   return (
-    <section id="reviews" className="section-shell section-tone-soft section-continues py-16 md:py-24">
+    <section id="reviews" className="section-shell section-tone-soft py-16 md:py-24">
       <div className="mx-auto max-w-6xl px-5 md:px-8">
         <Reveal>
           <div className="max-w-xl">

@@ -96,17 +96,12 @@ export function MenuPageContent() {
       </Reveal>
 
       <Stagger className="mt-12 space-y-14 md:mt-14 md:space-y-16" stagger={0.08}>
-        {menuPageSections.map((section, index) => (
+        {menuPageSections.map((section) => (
           <StaggerItem key={section.id}>
             <section id={section.id} className="scroll-mt-32">
-              <div className="mb-5 flex items-baseline gap-3">
-                <span className="section-label text-brand-green-muted/70">
-                  0{index + 1}
-                </span>
-                <h2 className="font-display text-2xl font-light text-foreground md:text-3xl">
-                  {section.title}
-                </h2>
-              </div>
+              <h2 className="font-display text-2xl font-light text-foreground md:text-3xl">
+                {section.title}
+              </h2>
 
               <ul className="divide-y divide-border border-y border-border">
                 {section.items.map((item) => (

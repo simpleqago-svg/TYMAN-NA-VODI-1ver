@@ -1,13 +1,25 @@
 .section-shell {
   position: relative;
   isolation: isolate;
-  background-color: var(--section-bg-core, var(--section-bg-start));
+  background-color: var(--section-fade-in, var(--section-bg-start));
   background-image: linear-gradient(
     180deg,
     var(--section-fade-in, var(--section-bg-start)) 0%,
-    var(--section-bg-start) 11%,
-    var(--section-bg-core, var(--section-bg-start)) 48%,
-    var(--section-bg-end) 89%,
+    color-mix(
+        in srgb,
+        var(--section-fade-in, var(--section-bg-start)) 55%,
+        var(--section-bg-start) 45%
+      )
+      7%,
+    var(--section-bg-start) 18%,
+    var(--section-bg-core, var(--section-bg-start)) 50%,
+    var(--section-bg-end) 82%,
+    color-mix(
+        in srgb,
+        var(--section-bg-end) 55%,
+        var(--section-fade-out, var(--section-bg-end)) 45%
+      )
+      93%,
     var(--section-fade-out, var(--section-bg-end)) 100%
   );
 }
@@ -23,6 +35,8 @@
     transparent 78%
   );
   opacity: var(--section-glow, 0.22);
+  -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 14%, #000 100%);
+  mask-image: linear-gradient(180deg, transparent 0%, #000 14%, #000 100%);
 }
 
 .section-shell > * {
@@ -37,8 +51,41 @@
 
 .section-after-catering {
   --section-fade-in: #0f1311;
-  --section-bg-start: #121816;
-  --section-bg-core: #151c19;
+  --section-bg-start: #0f1311;
+  --section-bg-core: #131816;
+  --section-bg-end: #151c19;
+  --section-fade-out: #151c19;
+}
+
+/* верх секции = низ предыдущей — без overlap, только цвет */
+#atmosphere.section-tone-deep {
+  --section-fade-in: #0f1311;
+  --section-bg-start: #0f1311;
+}
+
+#vip.section-tone-vip {
+  --section-fade-in: #0e110f;
+  --section-bg-start: #0e110f;
+}
+
+#menu-preview.section-tone-soft {
+  --section-fade-in: #111613;
+  --section-bg-start: #111613;
+}
+
+#reviews.section-tone-soft {
+  --section-fade-in: #131816;
+  --section-bg-start: #131816;
+}
+
+#catering.section-tone-base {
+  --section-fade-in: #131816;
+  --section-bg-start: #131816;
+}
+
+#contacts.section-tone-light {
+  --section-fade-in: #151c19;
+  --section-bg-start: #151c19;
 }
 
 .section-tone-light {
@@ -132,7 +179,14 @@
 .section-continues {
   background-image: linear-gradient(
     180deg,
-    var(--section-bg-core, var(--section-bg-start)) 0%,
+    var(--section-fade-in, var(--section-bg-core, var(--section-bg-start))) 0%,
+    color-mix(
+        in srgb,
+        var(--section-fade-in, var(--section-bg-core, var(--section-bg-start))) 55%,
+        var(--section-bg-core, var(--section-bg-start)) 45%
+      )
+      7%,
+    var(--section-bg-core, var(--section-bg-start)) 18%,
     var(--section-bg-end) 88%,
     var(--section-fade-out, var(--section-bg-end)) 100%
   );

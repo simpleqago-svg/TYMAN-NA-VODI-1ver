@@ -3,19 +3,32 @@
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 
-const SCROLL_THRESHOLD = 360;
 const INTERSECTION_THRESHOLD = 0.12;
 
-export function useFloatingBookCta(isModalOpen: boolean) {
+export type BookCtaPlacement = "hero" | "floating" | "hidden";
+
+export function useBookCtaPlacement(isModalOpen: boolean): BookCtaPlacement {
   const pathname = usePathname();
+  const [heroVisible, setHeroVisible] = useState(pathname === "/");
   const [inPageCtaVisible, setInPageCtaVisible] = useState(false);
-  const [scrolledEnough, setScrolledEnough] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => setScrolledEnough(window.scrollY > SCROLL_THRESHOLD);
-    handleScroll();
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+    const hero = document.getElementById("hero");
+
+    if (!hero) {
+      setHeroVisible(false);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setHeroVisible(entry.isIntersecting && entry.intersectionRatio >= 0.2);
+      },
+      { threshold: [0, 0.2, 0.45], rootMargin: "-10% 0px -20% 0px" },
+    );
+
+    observer.observe(hero);
+    return () => observer.disconnect();
   }, [pathname]);
 
   useEffect(() => {
@@ -51,5 +64,7 @@ export function useFloatingBookCta(isModalOpen: boolean) {
     return () => observer.disconnect();
   }, [pathname]);
 
-  return scrolledEnough && !inPageCtaVisible && !isModalOpen;
+  if (isModalOpen || inPageCtaVisible) return "hidden";
+  if (pathname === "/" && heroVisible) return "hero";
+  return "floating";
 }

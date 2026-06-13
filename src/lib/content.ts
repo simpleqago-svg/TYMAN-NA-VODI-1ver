@@ -367,7 +367,6 @@ export const bookingTriggerContent = {
 } as const;
 
 export const sectionActions = {
-  hero: { href: "#why", label: "Почему сюда" },
   why: {
     hint: "Посмотрите, как выглядит вечер в lounge.",
     href: "#atmosphere",

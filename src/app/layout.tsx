@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import { MotionConfig } from "framer-motion";
+import { MotionConfig, LayoutGroup } from "framer-motion";
 import { Cormorant_Garamond, Onest } from "next/font/google";
 import { BookingProvider } from "@/components/booking/BookingProvider";
 import { BookingModal } from "@/components/booking/BookingModal";
-import { StickyBooking } from "@/components/layout/Shell";
+import { BookTableCta } from "@/components/booking/BookTableCta";
 import { siteConfig } from "@/lib/site-config";
 import "./globals.css";
 
@@ -39,11 +39,13 @@ export default function RootLayout({
     <html lang="ru" className={`${cormorant.variable} ${onest.variable} h-full`}>
       <body className="min-h-full bg-background font-body text-foreground antialiased">
         <MotionConfig reducedMotion="user">
-          <BookingProvider>
-            {children}
-            <BookingModal />
-            <StickyBooking />
-          </BookingProvider>
+          <LayoutGroup id="book-cta">
+            <BookingProvider>
+              {children}
+              <BookingModal />
+              <BookTableCta />
+            </BookingProvider>
+          </LayoutGroup>
         </MotionConfig>
         <div className="grain" aria-hidden="true" />
       </body>

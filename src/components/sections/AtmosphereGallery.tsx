@@ -85,10 +85,7 @@ export function AtmosphereGallery() {
                     : "border-border bg-surface text-muted hover:border-border-green hover:text-foreground"
                 }`}
               >
-                <span className="block text-[0.65rem] uppercase tracking-[0.22em] text-brand-green-muted/80">
-                  0{index + 1}
-                </span>
-                <span className="mt-1 block whitespace-nowrap font-display text-sm md:text-base">
+                <span className="block whitespace-nowrap font-display text-sm md:text-base">
                   {item.title}
                 </span>
               </button>

@@ -24,7 +24,7 @@ export function MenuPreviewSection() {
         </Reveal>
 
         <Stagger className="mt-8 grid gap-px border border-border bg-border md:grid-cols-3">
-          {menuCategories.map((category, index) => (
+          {menuCategories.map((category) => (
             <StaggerItem key={category.id}>
               <article className="group flex h-full flex-col bg-surface">
                 <div className="relative aspect-[4/3] overflow-hidden">
@@ -37,9 +37,6 @@ export function MenuPreviewSection() {
                     sizes="(max-width: 768px) 100vw, 33vw"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-surface/80 via-transparent to-transparent" />
-                  <span className="absolute left-4 top-4 section-label text-brand-green-muted/80">
-                    0{index + 1}
-                  </span>
                 </div>
                 <div className="flex flex-1 flex-col border-t border-border p-5 md:p-6">
                   <h3 className="font-display text-xl text-foreground md:text-2xl">
