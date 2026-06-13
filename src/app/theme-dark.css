@@ -1,0 +1,150 @@
+/* Тёмная версия — включается через NEXT_PUBLIC_SITE_THEME=dark */
+html.theme-dark {
+  --background: #0a0d0b;
+  --foreground: #e2e5e1;
+  --muted: #7a8a83;
+  --muted-foreground: #7a8a83;
+  --surface: #0e1210;
+  --surface-elevated: #121714;
+
+  --brand-green: #243830;
+  --brand-green-light: #4a7562;
+  --brand-green-muted: #5f8773;
+  --brand-green-dim: rgba(36, 56, 48, 0.28);
+  --brand-green-glow: rgba(74, 117, 98, 0.14);
+
+  --brand-burgundy: #4f2d38;
+  --brand-burgundy-light: #7a4f5c;
+  --brand-burgundy-dim: rgba(79, 45, 56, 0.14);
+
+  --brand-teal: #3a6561;
+  --brand-teal-muted: #558582;
+  --brand-teal-dim: rgba(58, 101, 97, 0.12);
+
+  --accent: #a89882;
+  --accent-dim: rgba(168, 152, 130, 0.08);
+
+  --border: rgba(226, 229, 225, 0.07);
+  --border-green: rgba(74, 117, 98, 0.22);
+  --overlay: rgba(8, 10, 9, 0.94);
+}
+
+html.theme-dark body {
+  background-image:
+    radial-gradient(ellipse 90% 55% at 50% -15%, var(--brand-green-dim), transparent 55%),
+    radial-gradient(ellipse 60% 40% at 100% 50%, var(--brand-burgundy-dim), transparent 50%);
+}
+
+html.theme-dark .grain {
+  opacity: 0.015;
+}
+
+html.theme-dark .section-after-hero {
+  --section-fade-in: #0c100e;
+  --section-bg-start: #0b0f0d;
+}
+
+html.theme-dark .section-after-catering {
+  --section-fade-in: #070a08;
+  --section-bg-start: #070a08;
+  --section-bg-core: #0a0e0c;
+  --section-bg-end: #0c100e;
+  --section-fade-out: #0c100e;
+}
+
+html.theme-dark #atmosphere.section-tone-deep {
+  --section-fade-in: #070a08;
+  --section-bg-start: #070a08;
+}
+
+html.theme-dark #vip.section-tone-vip {
+  --section-fade-in: #060908;
+  --section-bg-start: #060908;
+}
+
+html.theme-dark #menu-preview.section-tone-soft {
+  --section-fade-in: #090c0a;
+  --section-bg-start: #090c0a;
+}
+
+html.theme-dark #reviews.section-tone-soft {
+  --section-fade-in: #0a0e0c;
+  --section-bg-start: #0a0e0c;
+}
+
+html.theme-dark #catering.section-tone-base {
+  --section-fade-in: #0a0e0c;
+  --section-bg-start: #0a0e0c;
+}
+
+html.theme-dark #contacts.section-tone-light {
+  --section-fade-in: #0c100e;
+  --section-bg-start: #0c100e;
+}
+
+html.theme-dark .section-tone-light {
+  --background: #0c100e;
+  --surface: #111614;
+  --surface-elevated: #151b18;
+  --section-fade-in: #0c100e;
+  --section-bg-start: #0c100e;
+  --section-bg-core: #0c100e;
+  --section-bg-end: #0c100e;
+  --section-fade-out: #0c100e;
+  --section-glow: 0.22;
+}
+
+html.theme-dark .section-tone-base {
+  --background: #090d0b;
+  --surface: #0e1210;
+  --surface-elevated: #121714;
+  --section-fade-in: #0a0e0c;
+  --section-bg-start: #0a0e0c;
+  --section-bg-core: #090d0b;
+  --section-bg-end: #070a08;
+  --section-fade-out: #070a08;
+  --section-glow: 0.18;
+}
+
+html.theme-dark .section-tone-deep {
+  --background: #050706;
+  --surface: #080a09;
+  --surface-elevated: #0a0d0b;
+  --section-fade-in: #070a08;
+  --section-bg-start: #060908;
+  --section-bg-core: #050706;
+  --section-bg-end: #060908;
+  --section-fade-out: #060908;
+  --section-glow: 0.1;
+  --border: rgba(226, 229, 225, 0.05);
+}
+
+html.theme-dark .section-tone-soft {
+  --background: #090c0a;
+  --surface: #0d110f;
+  --surface-elevated: #111614;
+  --section-fade-in: #060908;
+  --section-bg-start: #080b09;
+  --section-bg-core: #090c0a;
+  --section-bg-end: #0a0e0c;
+  --section-fade-out: #0a0e0c;
+  --section-glow: 0.14;
+}
+
+html.theme-dark .section-tone-vip {
+  --background: #050706;
+  --surface: #080a09;
+  --surface-elevated: #0c100e;
+  --section-fade-in: #060908;
+  --section-bg-start: #050807;
+  --section-bg-core: #050706;
+  --section-bg-end: #080b09;
+  --section-fade-out: #090c0a;
+  --section-glow: 0.08;
+  --border: rgba(122, 79, 92, 0.12);
+  --brand-green-dim: rgba(79, 45, 56, 0.1);
+}
+
+html.theme-dark .section-shell::before {
+  opacity: calc(var(--section-glow, 0.18) * 0.85);
+}
