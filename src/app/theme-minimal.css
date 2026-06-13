@@ -1,0 +1,213 @@
+/* Минимализм — ч/б + два акцента, без зелёного. NEXT_PUBLIC_SITE_THEME=minimal */
+html.theme-minimal {
+  --background: #0a0a0a;
+  --foreground: #f5f5f5;
+  --muted: #8a8a8a;
+  --muted-foreground: #8a8a8a;
+  --surface: #111111;
+  --surface-elevated: #181818;
+
+  /* brand-* → нейтрали (компоненты не трогаем) */
+  --brand-green: #1f1f1f;
+  --brand-green-light: #f0f0f0;
+  --brand-green-muted: #b3b3b3;
+  --brand-green-dim: rgba(255, 255, 255, 0.04);
+  --brand-green-glow: rgba(255, 255, 255, 0.1);
+
+  --brand-burgundy: #525252;
+  --brand-burgundy-light: #d4d4d4;
+  --brand-burgundy-dim: rgba(255, 255, 255, 0.03);
+
+  --brand-teal: #737373;
+  --brand-teal-muted: #a3a3a3;
+  --brand-teal-dim: rgba(255, 255, 255, 0.03);
+
+  /* акцент 1 — тёплый белый, акцент 2 — серебро */
+  --accent: #e8e6e1;
+  --accent-dim: rgba(232, 230, 225, 0.08);
+
+  --border: rgba(245, 245, 245, 0.1);
+  --border-green: rgba(245, 245, 245, 0.22);
+  --overlay: rgba(0, 0, 0, 0.92);
+}
+
+html.theme-minimal body {
+  background-image: none;
+}
+
+html.theme-minimal ::selection {
+  background: rgba(255, 255, 255, 0.18);
+  color: var(--foreground);
+}
+
+html.theme-minimal .grain {
+  opacity: 0.025;
+}
+
+html.theme-minimal .section-label {
+  color: var(--brand-teal-muted);
+}
+
+html.theme-minimal .btn-primary {
+  border-color: color-mix(in srgb, var(--foreground) 55%, transparent);
+  background: color-mix(in srgb, var(--foreground) 8%, transparent);
+}
+
+html.theme-minimal .btn-primary:hover {
+  background: var(--foreground);
+  border-color: var(--foreground);
+  color: var(--background);
+  box-shadow: 0 0 28px rgba(255, 255, 255, 0.12);
+}
+
+html.theme-minimal .btn-secondary:hover {
+  border-color: var(--border-green);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+html.theme-minimal .floating-book-cta .btn-primary {
+  border-color: rgba(245, 245, 245, 0.35);
+  background: color-mix(in srgb, var(--background) 55%, var(--foreground) 45%);
+  box-shadow:
+    0 10px 40px rgba(0, 0, 0, 0.5),
+    0 0 24px rgba(255, 255, 255, 0.06);
+}
+
+@media (hover: hover) {
+  html.theme-minimal main h2:hover,
+  html.theme-minimal main h3:hover,
+  html.theme-minimal footer h2:hover,
+  html.theme-minimal .text-glow-hover:hover,
+  html.theme-minimal .group:hover .text-glow-hover {
+    color: var(--foreground);
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.15);
+  }
+}
+
+html.theme-minimal .section-shell::before {
+  background: radial-gradient(
+    ellipse 100% 55% at 50% -5%,
+    rgba(255, 255, 255, 0.04),
+    transparent 78%
+  );
+  opacity: 0.12;
+}
+
+html.theme-minimal .section-after-hero {
+  --section-fade-in: #0a0a0a;
+  --section-bg-start: #0c0c0c;
+}
+
+html.theme-minimal .section-after-catering {
+  --section-fade-in: #0e0e0e;
+  --section-bg-start: #0e0e0e;
+  --section-bg-core: #111111;
+  --section-bg-end: #141414;
+  --section-fade-out: #141414;
+}
+
+html.theme-minimal #atmosphere.section-tone-deep {
+  --section-fade-in: #0e0e0e;
+  --section-bg-start: #0e0e0e;
+}
+
+html.theme-minimal #vip.section-tone-vip {
+  --section-fade-in: #101010;
+  --section-bg-start: #101010;
+}
+
+html.theme-minimal #menu-preview.section-tone-soft {
+  --section-fade-in: #121212;
+  --section-bg-start: #121212;
+}
+
+html.theme-minimal #reviews.section-tone-soft {
+  --section-fade-in: #141414;
+  --section-bg-start: #141414;
+}
+
+html.theme-minimal #catering.section-tone-base {
+  --section-fade-in: #141414;
+  --section-bg-start: #141414;
+}
+
+html.theme-minimal #contacts.section-tone-light {
+  --section-fade-in: #161616;
+  --section-bg-start: #161616;
+}
+
+html.theme-minimal .section-tone-light {
+  --background: #161616;
+  --surface: #1a1a1a;
+  --surface-elevated: #1f1f1f;
+  --section-fade-in: #161616;
+  --section-bg-start: #161616;
+  --section-bg-core: #161616;
+  --section-bg-end: #161616;
+  --section-fade-out: #161616;
+  --section-glow: 0.08;
+}
+
+html.theme-minimal .section-tone-base {
+  --background: #111111;
+  --surface: #151515;
+  --surface-elevated: #1a1a1a;
+  --section-fade-in: #131313;
+  --section-bg-start: #131313;
+  --section-bg-core: #111111;
+  --section-bg-end: #0f0f0f;
+  --section-fade-out: #0e0e0e;
+  --section-glow: 0.1;
+}
+
+html.theme-minimal .section-tone-deep {
+  --background: #080808;
+  --surface: #0c0c0c;
+  --surface-elevated: #101010;
+  --section-fade-in: #0e0e0e;
+  --section-bg-start: #0a0a0a;
+  --section-bg-core: #080808;
+  --section-bg-end: #0c0c0c;
+  --section-fade-out: #101010;
+  --section-glow: 0.06;
+  --border: rgba(245, 245, 245, 0.07);
+}
+
+html.theme-minimal .section-tone-soft {
+  --background: #121212;
+  --surface: #161616;
+  --surface-elevated: #1a1a1a;
+  --section-fade-in: #101010;
+  --section-bg-start: #111111;
+  --section-bg-core: #121212;
+  --section-bg-end: #131313;
+  --section-fade-out: #141414;
+  --section-glow: 0.08;
+}
+
+html.theme-minimal .section-tone-vip {
+  --background: #0a0a0a;
+  --surface: #0e0e0e;
+  --surface-elevated: #131313;
+  --section-fade-in: #101010;
+  --section-bg-start: #0c0c0c;
+  --section-bg-core: #0a0a0a;
+  --section-bg-end: #111111;
+  --section-fade-out: #121212;
+  --section-glow: 0.05;
+  --border: rgba(245, 245, 245, 0.1);
+  --brand-green-dim: rgba(255, 255, 255, 0.03);
+}
+
+html.theme-minimal .vip-frame {
+  border-color: rgba(245, 245, 245, 0.12);
+  background: linear-gradient(
+    145deg,
+    color-mix(in srgb, var(--foreground) 4%, var(--surface)) 0%,
+    var(--surface) 45%,
+    color-mix(in srgb, var(--foreground) 3%, var(--surface)) 100%
+  );
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    0 24px 60px rgba(0, 0, 0, 0.35);
+}

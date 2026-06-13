@@ -5,9 +5,10 @@ import { BookingProvider } from "@/components/booking/BookingProvider";
 import { BookingModal } from "@/components/booking/BookingModal";
 import { BookTableCta } from "@/components/booking/BookTableCta";
 import { siteConfig } from "@/lib/site-config";
-import { getSiteTheme } from "@/lib/site-theme";
+import { getSiteTheme, getThemeClassName } from "@/lib/site-theme";
 import "./globals.css";
 import "./theme-dark.css";
+import "./theme-minimal.css";
 
 const cormorant = Cormorant_Garamond({
   variable: "--font-cormorant",
@@ -38,11 +39,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   const theme = getSiteTheme();
+  const themeClass = getThemeClassName(theme);
 
   return (
     <html
       lang="ru"
-      className={`${cormorant.variable} ${onest.variable} h-full${theme === "dark" ? " theme-dark" : ""}`}
+      className={`${cormorant.variable} ${onest.variable} h-full${themeClass ? ` ${themeClass}` : ""}`}
     >
       <body className="min-h-full bg-background font-body text-foreground antialiased">
         <MotionConfig reducedMotion="user">

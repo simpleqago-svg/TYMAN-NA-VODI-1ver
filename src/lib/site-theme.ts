@@ -1,9 +1,14 @@
-export type SiteTheme = "default" | "dark";
+export type SiteTheme = "default" | "dark" | "minimal";
 
 export function getSiteTheme(): SiteTheme {
-  return process.env.NEXT_PUBLIC_SITE_THEME === "dark" ? "dark" : "default";
+  const theme = process.env.NEXT_PUBLIC_SITE_THEME;
+  if (theme === "dark") return "dark";
+  if (theme === "minimal") return "minimal";
+  return "default";
 }
 
-export function isDarkTheme(): boolean {
-  return getSiteTheme() === "dark";
+export function getThemeClassName(theme: SiteTheme): string {
+  if (theme === "dark") return "theme-dark";
+  if (theme === "minimal") return "theme-minimal";
+  return "";
 }
