@@ -1,23 +1,39 @@
+@import "./section-tones.css";
 @import "tailwindcss";
 
 :root {
-  --background: #0a0908;
-  --foreground: #e6e2da;
-  --muted: #8f8a83;
-  --muted-foreground: #8f8a83;
-  --surface: #111010;
-  --surface-elevated: #161514;
-  --brand-green: #2d4540;
-  --brand-green-light: #3a554e;
-  --brand-green-dim: rgba(45, 69, 64, 0.07);
-  --brand-burgundy: #5c3d47;
-  --brand-burgundy-light: #6e4a56;
-  --brand-burgundy-dim: rgba(92, 61, 71, 0.07);
-  --accent: #c4b8a8;
-  --accent-dim: rgba(196, 184, 168, 0.06);
-  --border: rgba(230, 226, 218, 0.09);
-  --border-green: rgba(230, 226, 218, 0.09);
-  --overlay: rgba(10, 9, 8, 0.86);
+  /* Base — тёмный шалфей, не чистый чёрный */
+  --background: #151c19;
+  --foreground: #eaece8;
+  --muted: #93a099;
+  --muted-foreground: #93a099;
+  --surface: #1c2522;
+  --surface-elevated: #24302b;
+
+  /* Зелёный рейки бара */
+  --brand-green: #2f4f42;
+  --brand-green-light: #5c917a;
+  --brand-green-muted: #78a892;
+  --brand-green-dim: rgba(47, 79, 66, 0.22);
+  --brand-green-glow: rgba(92, 145, 122, 0.2);
+
+  /* Бordo / dusty rose — подушки террасы */
+  --brand-burgundy: #6e3f4d;
+  --brand-burgundy-light: #a06775;
+  --brand-burgundy-dim: rgba(110, 63, 77, 0.16);
+
+  /* Teal — акценты террасы */
+  --brand-teal: #4a8580;
+  --brand-teal-muted: #6aa39e;
+  --brand-teal-dim: rgba(74, 133, 128, 0.14);
+
+  /* Тёплый мед / фрукты */
+  --accent: #c4b49a;
+  --accent-dim: rgba(196, 180, 154, 0.1);
+
+  --border: rgba(234, 236, 232, 0.09);
+  --border-green: rgba(92, 145, 122, 0.28);
+  --overlay: rgba(21, 28, 25, 0.9);
 }
 
 @theme inline {
@@ -29,10 +45,15 @@
   --color-surface-elevated: var(--surface-elevated);
   --color-brand-green: var(--brand-green);
   --color-brand-green-light: var(--brand-green-light);
+  --color-brand-green-muted: var(--brand-green-muted);
+  --color-brand-green-glow: var(--brand-green-glow);
   --color-brand-green-dim: var(--brand-green-dim);
   --color-brand-burgundy: var(--brand-burgundy);
   --color-brand-burgundy-light: var(--brand-burgundy-light);
   --color-brand-burgundy-dim: var(--brand-burgundy-dim);
+  --color-brand-teal: var(--brand-teal);
+  --color-brand-teal-muted: var(--brand-teal-muted);
+  --color-brand-teal-dim: var(--brand-teal-dim);
   --color-accent: var(--accent);
   --color-accent-dim: var(--accent-dim);
   --color-border: var(--border);
@@ -53,13 +74,16 @@ html {
 }
 
 body {
-  background: var(--background);
+  background-color: var(--background);
+  background-image:
+    radial-gradient(ellipse 90% 55% at 50% -15%, var(--brand-green-dim), transparent 55%),
+    radial-gradient(ellipse 60% 40% at 100% 50%, var(--brand-burgundy-dim), transparent 50%);
   color: var(--foreground);
   font-family: var(--font-onest), system-ui, sans-serif;
 }
 
 ::selection {
-  background: rgba(196, 184, 168, 0.22);
+  background: rgba(92, 145, 122, 0.35);
   color: var(--foreground);
 }
 
@@ -68,7 +92,7 @@ body {
   position: fixed;
   inset: 0;
   z-index: 50;
-  opacity: 0.018;
+  opacity: 0.02;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
 }
 
@@ -130,7 +154,7 @@ body {
   font-size: 0.65rem;
   letter-spacing: 0.32em;
   text-transform: uppercase;
-  color: color-mix(in srgb, var(--muted) 88%, var(--foreground));
+  color: color-mix(in srgb, var(--brand-green-muted) 70%, var(--brand-teal-muted) 30%);
 }
 
 .btn-primary {
@@ -140,23 +164,26 @@ body {
   gap: 0.5rem;
   padding: 0.875rem 1.625rem;
   border-radius: 0;
-  border: 1px solid color-mix(in srgb, var(--foreground) 28%, transparent);
-  background: transparent;
+  border: 1px solid color-mix(in srgb, var(--brand-green-light) 55%, transparent);
+  background: color-mix(in srgb, var(--brand-green) 35%, transparent);
   color: var(--foreground);
   font-size: 0.75rem;
   font-weight: 500;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   transition:
-    background 0.35s ease,
-    border-color 0.35s ease,
-    color 0.35s ease;
+    background 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .btn-primary:hover {
-  background: color-mix(in srgb, var(--foreground) 92%, transparent);
-  border-color: transparent;
-  color: var(--background);
+  background: color-mix(in srgb, var(--brand-green-light) 72%, var(--brand-green));
+  border-color: var(--brand-green-light);
+  color: var(--foreground);
+  box-shadow: 0 0 32px var(--brand-green-glow);
 }
 
 .btn-secondary {
@@ -168,19 +195,22 @@ body {
   border-radius: 0;
   border: 1px solid var(--border);
   background: transparent;
-  color: color-mix(in srgb, var(--foreground) 72%, var(--muted));
+  color: var(--muted);
   font-size: 0.75rem;
   font-weight: 500;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   transition:
-    color 0.3s ease,
-    border-color 0.3s ease;
+    color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    background 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .btn-secondary:hover {
   color: var(--foreground);
-  border-color: color-mix(in srgb, var(--foreground) 22%, transparent);
+  border-color: var(--border-green);
+  background: var(--brand-green-dim);
 }
 
 .card-surface {
@@ -190,4 +220,53 @@ body {
 
 .divide-minimal > * + * {
   border-top: 1px solid var(--border);
+}
+
+.menu-item {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: baseline;
+  column-gap: 0.75rem;
+  row-gap: 0.35rem;
+  padding-block: 1rem;
+}
+
+.menu-item__leaders {
+  min-width: 1.5rem;
+  border-bottom: 1px dotted color-mix(in srgb, var(--muted) 40%, transparent);
+  margin-bottom: 0.2em;
+}
+
+.menu-item__note {
+  padding-top: 0.15rem;
+}
+
+@media (hover: hover) {
+  main h2,
+  main h3,
+  footer h2,
+  .text-glow-hover {
+    transition:
+      color 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+      text-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  main h2:hover,
+  main h3:hover,
+  footer h2:hover,
+  .text-glow-hover:hover,
+  .group:hover .text-glow-hover {
+    color: color-mix(in srgb, var(--foreground) 94%, var(--brand-green-light) 6%);
+    text-shadow: 0 0 22px rgba(92, 145, 122, 0.28);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  main h2:hover,
+  main h3:hover,
+  footer h2:hover,
+  .text-glow-hover:hover,
+  .group:hover .text-glow-hover {
+    text-shadow: none;
+  }
 }

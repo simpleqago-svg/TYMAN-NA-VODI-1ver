@@ -1,46 +1,62 @@
 import Image from "next/image";
 import Link from "next/link";
-import { menuCategories } from "@/lib/content";
+import { menuCategories, menuPreviewContent } from "@/lib/content";
 import { Reveal } from "@/components/ui/Reveal";
+import { Stagger, StaggerItem } from "@/components/ui/Stagger";
 
 export function MenuPreviewSection() {
   return (
-    <section id="menu-preview" className="border-t border-border py-28 md:py-36">
+    <section
+      id="menu-preview"
+      className="section-shell section-tone-soft border-t border-border py-16 md:py-24"
+    >
       <div className="mx-auto max-w-6xl px-5 md:px-8">
         <Reveal>
-          <div className="max-w-xl">
-            <p className="section-label mb-6">Меню</p>
-            <h2 className="font-display text-3xl font-light text-foreground md:text-4xl">
-              Всё для вечера — в одном месте
+          <div className="max-w-2xl">
+            <p className="section-label mb-4">{menuPreviewContent.label}</p>
+            <h2 className="font-display text-3xl font-light leading-snug text-foreground md:text-4xl">
+              {menuPreviewContent.title}
             </h2>
+            <p className="mt-4 text-sm leading-relaxed text-muted md:text-base">
+              {menuPreviewContent.description}
+            </p>
           </div>
         </Reveal>
 
-        <div className="mt-14 grid gap-px bg-border md:grid-cols-3">
+        <Stagger className="mt-8 grid gap-px border border-border bg-border md:grid-cols-3">
           {menuCategories.map((category, index) => (
-            <Reveal key={category.id} delay={index * 80}>
-              <article className="group relative bg-background">
-                <div className="relative aspect-[3/4] overflow-hidden">
+            <StaggerItem key={category.id}>
+              <article className="group flex h-full flex-col bg-surface">
+                <div className="relative aspect-[4/3] overflow-hidden">
                   <Image
                     src={category.image}
-                    alt={category.title}
+                    alt={category.imageAlt}
                     fill
-                    className="object-cover opacity-60 transition duration-700 group-hover:opacity-80 group-hover:scale-[1.02]"
+                    className="object-cover opacity-80 transition duration-700 group-hover:opacity-95"
+                    quality={90}
                     sizes="(max-width: 768px) 100vw, 33vw"
                   />
+                  <div className="absolute inset-0 bg-gradient-to-t from-surface/80 via-transparent to-transparent" />
+                  <span className="absolute left-4 top-4 section-label text-brand-green-muted/80">
+                    0{index + 1}
+                  </span>
                 </div>
-                <div className="border-t border-border p-6">
-                  <h3 className="font-display text-xl text-foreground">{category.title}</h3>
-                  <p className="mt-2 text-xs text-muted">{category.description}</p>
+                <div className="flex flex-1 flex-col border-t border-border p-5 md:p-6">
+                  <h3 className="font-display text-xl text-foreground md:text-2xl">
+                    {category.title}
+                  </h3>
+                  <p className="mt-2 text-sm leading-relaxed text-muted">
+                    {category.description}
+                  </p>
                 </div>
               </article>
-            </Reveal>
+            </StaggerItem>
           ))}
-        </div>
+        </Stagger>
 
-        <Reveal className="mt-12">
-          <Link href="/menu" className="btn-secondary">
-            Посмотреть меню
+        <Reveal className="mt-8 flex justify-start">
+          <Link href="/menu" className="btn-primary">
+            {menuPreviewContent.ctaLabel}
           </Link>
         </Reveal>
       </div>

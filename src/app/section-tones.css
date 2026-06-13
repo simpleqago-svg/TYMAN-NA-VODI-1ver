@@ -1,0 +1,126 @@
+.section-shell {
+  position: relative;
+  isolation: isolate;
+  background: linear-gradient(
+    180deg,
+    var(--section-bg-start) 0%,
+    color-mix(in srgb, var(--section-bg-start) 72%, var(--background)) 14%,
+    color-mix(in srgb, var(--section-bg-start) 38%, var(--background)) 32%,
+    var(--background) 58%,
+    var(--background) 78%,
+    color-mix(in srgb, var(--background) 82%, var(--section-bg-end, var(--background))) 100%
+  );
+}
+
+.section-shell::before {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse 90% 50% at 50% -10%,
+    var(--brand-green-dim),
+    transparent 72%
+  );
+  opacity: var(--section-glow, 0.35);
+}
+
+.section-shell::after {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 72px;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    color-mix(in srgb, var(--section-bg-end, var(--background)) 35%, transparent)
+  );
+  z-index: 0;
+}
+
+.section-shell > * {
+  position: relative;
+  z-index: 1;
+}
+
+.section-tone-light {
+  --background: #151c19;
+  --surface: #1c2522;
+  --surface-elevated: #24302b;
+  --section-bg-start: #161d1a;
+  --section-bg-end: #151c19;
+  --section-glow: 0.42;
+}
+
+.section-tone-base {
+  --background: #121816;
+  --surface: #18201c;
+  --surface-elevated: #1e2823;
+  --section-bg-start: #151c19;
+  --section-bg-end: #101512;
+  --section-glow: 0.32;
+}
+
+.section-tone-deep {
+  --background: #0a0d0b;
+  --surface: #0e1210;
+  --surface-elevated: #121714;
+  --section-bg-start: #101512;
+  --section-bg-end: #0c0f0d;
+  --section-glow: 0.2;
+  --border: rgba(234, 236, 232, 0.06);
+}
+
+.section-tone-mid {
+  --background: #0e110f;
+  --surface: #121714;
+  --surface-elevated: #161b18;
+  --section-bg-start: #0c0f0d;
+  --section-bg-end: #101411;
+  --section-glow: 0.24;
+}
+
+.section-tone-soft {
+  --background: #111613;
+  --surface: #161b18;
+  --surface-elevated: #1a201c;
+  --section-bg-start: #0e110f;
+  --section-bg-end: #131816;
+  --section-glow: 0.28;
+}
+
+.section-tone-vip {
+  --background: #0b0e0c;
+  --surface: #101412;
+  --surface-elevated: #151a16;
+  --section-bg-start: #0e110f;
+  --section-bg-end: #101512;
+  --section-glow: 0.12;
+  --border: rgba(160, 103, 117, 0.14);
+  --brand-green-dim: rgba(110, 63, 77, 0.12);
+}
+
+.vip-frame {
+  border: 1px solid color-mix(in srgb, var(--brand-burgundy-light) 28%, transparent);
+  background: linear-gradient(
+    145deg,
+    color-mix(in srgb, var(--brand-burgundy) 8%, var(--surface)) 0%,
+    var(--surface) 45%,
+    color-mix(in srgb, var(--brand-green) 6%, var(--surface)) 100%
+  );
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--brand-burgundy-light) 12%, transparent),
+    0 24px 60px rgba(0, 0, 0, 0.28);
+}
+
+.atmosphere-scroll {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.atmosphere-scroll::-webkit-scrollbar {
+  display: none;
+}

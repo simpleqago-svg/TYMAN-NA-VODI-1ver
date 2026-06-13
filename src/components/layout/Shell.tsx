@@ -2,8 +2,12 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { motion } from "framer-motion";
 import { siteConfig } from "@/lib/site-config";
 import { BookButton } from "@/components/booking/BookButton";
+import { useBooking } from "@/components/booking/BookingProvider";
+import { Reveal } from "@/components/ui/Reveal";
+import { springSmooth } from "@/lib/motion";
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
@@ -17,29 +21,29 @@ export function Header() {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-40 transition-all duration-500 ${
+      className={`fixed inset-x-0 top-0 z-40 border-b transition-[background-color,border-color,backdrop-filter] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
         scrolled
-          ? "border-b border-border bg-background/88 backdrop-blur-md"
-          : "bg-transparent"
+          ? "border-border-green bg-background/90 backdrop-blur-md"
+          : "border-transparent bg-transparent"
       }`}
     >
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-5 md:px-8">
         <Link
           href="/"
-          className="section-label shrink-0 text-foreground transition hover:text-muted"
+          className="section-label shrink-0 text-foreground text-glow-hover transition"
         >
           {siteConfig.name}
         </Link>
 
         <nav className="flex items-center gap-6 md:gap-10">
-          <Link href="/menu" className="section-label transition hover:text-foreground">
+          <Link href="/menu" className="section-label text-glow-hover transition">
             Меню
           </Link>
           <a
             href={siteConfig.instagram}
             target="_blank"
             rel="noopener noreferrer"
-            className="section-label transition hover:text-foreground"
+            className="section-label text-glow-hover transition"
           >
             Instagram
           </a>
@@ -54,35 +58,31 @@ export function Header() {
 }
 
 export function StickyBooking() {
-  const [visible, setVisible] = useState(false);
+  const { isOpen } = useBooking();
 
-  useEffect(() => {
-    const handleScroll = () => setVisible(window.scrollY > 480);
-    handleScroll();
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  if (isOpen) return null;
 
   return (
-    <div
-      className={`fixed inset-x-0 bottom-0 z-40 border-t border-border bg-background/94 p-4 backdrop-blur-md transition-transform duration-300 ${
-        visible ? "translate-y-0" : "translate-y-full"
-      }`}
+    <motion.div
+      initial={{ opacity: 0, y: 20, filter: "blur(6px)" }}
+      animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+      transition={{ ...springSmooth, delay: 0.6 }}
+      className="sticky-booking pointer-events-none fixed bottom-0 right-0 z-40 p-4 pr-5 pb-[max(1rem,env(safe-area-inset-bottom))] sm:pr-7 md:pr-10 lg:pr-14"
+      aria-label="Быстрое бронирование"
     >
-      <div className="mx-auto flex max-w-6xl justify-center">
-        <BookButton className="btn-primary w-full max-w-md md:w-auto md:min-w-[280px]">
-          Забронировать стол
-        </BookButton>
-      </div>
-    </div>
+      <BookButton className="btn-primary pointer-events-auto w-auto min-w-[220px] max-w-[calc(100vw-2.5rem)] px-5 py-3 text-[0.68rem] shadow-[0_8px_32px_rgba(0,0,0,0.45),0_0_24px_var(--brand-green-glow)] sm:min-w-[240px] md:min-w-[260px]">
+        Забронировать стол
+      </BookButton>
+    </motion.div>
   );
 }
 
 export function Footer() {
   return (
-    <footer id="contacts" className="border-t border-border pb-24 md:pb-20">
+    <footer id="contacts" className="section-shell section-tone-light border-t border-border pb-28 md:pb-24">
       <div className="mx-auto grid max-w-6xl gap-16 px-5 py-20 md:grid-cols-2 md:px-8">
-        <div>
+        <Reveal>
+          <div>
           <p className="section-label mb-6">Контакты</p>
           <h2 className="font-display text-3xl font-light text-foreground md:text-4xl">
             {siteConfig.name}
@@ -95,7 +95,7 @@ export function Footer() {
             </li>
             <li>
               <span className="section-label mb-1 block">Телефон</span>
-              <a href={`tel:${siteConfig.phone.replace(/\s/g, "")}`} className="hover:text-foreground">
+              <a href={`tel:${siteConfig.phone.replace(/\s/g, "")}`} className="text-glow-hover transition">
                 {siteConfig.phone}
               </a>
             </li>
@@ -105,7 +105,7 @@ export function Footer() {
                 href={siteConfig.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:text-foreground"
+                className="text-glow-hover transition"
               >
                 {siteConfig.instagramHandle}
               </a>
@@ -121,9 +121,11 @@ export function Footer() {
           <p className="mt-12 text-xs text-muted/60">
             © {new Date().getFullYear()} {siteConfig.name}
           </p>
-        </div>
+          </div>
+        </Reveal>
 
-        <div className="overflow-hidden border border-border">
+        <Reveal delay={80}>
+          <div className="overflow-hidden border border-border">
           <iframe
             title="Карта Tyman na Vodi"
             src={siteConfig.mapEmbedUrl}
@@ -135,7 +137,8 @@ export function Footer() {
             referrerPolicy="no-referrer-when-downgrade"
             className="grayscale contrast-[1.05] opacity-80"
           />
-        </div>
+          </div>
+        </Reveal>
       </div>
     </footer>
   );

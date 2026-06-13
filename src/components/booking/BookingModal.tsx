@@ -1,7 +1,9 @@
 "use client";
 
 import { FormEvent, useEffect, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import { siteConfig } from "@/lib/site-config";
+import { easeOutExpo, springSmooth } from "@/lib/motion";
 import { useBooking } from "./BookingProvider";
 
 export function BookingModal() {
@@ -29,8 +31,6 @@ export function BookingModal() {
     };
   }, [isOpen, closeBooking]);
 
-  if (!isOpen) return null;
-
   const title =
     bookingType === "vip" ? "Забронировать VIP-комнату" : "Забронировать стол";
 
@@ -57,20 +57,35 @@ export function BookingModal() {
   };
 
   return (
-    <div
-      className="fixed inset-0 z-[100] flex items-end justify-center p-4 sm:items-center sm:p-6"
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="booking-title"
-    >
-      <button
-        type="button"
-        className="absolute inset-0 bg-black/70 backdrop-blur-sm"
-        onClick={closeBooking}
-        aria-label="Закрыть"
-      />
+    <AnimatePresence>
+      {isOpen ? (
+        <motion.div
+          className="fixed inset-0 z-[100] flex items-end justify-center p-4 sm:items-center sm:p-6"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="booking-title"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.3, ease: easeOutExpo }}
+        >
+          <motion.button
+            type="button"
+            className="absolute inset-0 bg-black/70 backdrop-blur-sm"
+            onClick={closeBooking}
+            aria-label="Закрыть"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          />
 
-      <div className="card-surface relative w-full max-w-md p-6 sm:p-8">
+          <motion.div
+            className="card-surface relative w-full max-w-md p-6 sm:p-8"
+            initial={{ opacity: 0, y: 32, filter: "blur(8px)" }}
+            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            exit={{ opacity: 0, y: 20, filter: "blur(4px)" }}
+            transition={springSmooth}
+          >
         <button
           type="button"
           onClick={closeBooking}
@@ -129,8 +144,10 @@ export function BookingModal() {
             Отправить в WhatsApp
           </button>
         </form>
-      </div>
-    </div>
+          </motion.div>
+        </motion.div>
+      ) : null}
+    </AnimatePresence>
   );
 }
 

@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { easeInOutSmooth, easeOutSharp, springSnappy } from "@/lib/motion";
 
 interface AnimatedTextCycleProps {
   words: string[];
@@ -21,8 +22,8 @@ const wordVariants = {
     opacity: 1,
     filter: "blur(0px)",
     transition: {
-      duration: 0.4,
-      ease: [0.22, 1, 0.36, 1] as const,
+      duration: 0.45,
+      ease: easeInOutSmooth,
     },
   },
   exit: {
@@ -30,8 +31,8 @@ const wordVariants = {
     opacity: 0,
     filter: "blur(8px)",
     transition: {
-      duration: 0.3,
-      ease: [0.4, 0, 1, 1] as const,
+      duration: 0.35,
+      ease: easeOutSharp,
     },
   },
 };
@@ -88,12 +89,7 @@ export default function AnimatedTextCycle({
         className="relative inline-block align-baseline overflow-hidden"
         animate={{
           width,
-          transition: {
-            type: "spring",
-            stiffness: 150,
-            damping: 15,
-            mass: 1.2,
-          },
+          transition: springSnappy,
         }}
       >
         <AnimatePresence mode="wait" initial={false}>

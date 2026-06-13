@@ -1,5 +1,6 @@
 "use client";
 
+import { motion } from "framer-motion";
 import { useBooking } from "./BookingProvider";
 
 type BookButtonProps = {
@@ -12,12 +13,14 @@ export function BookButton({ type = "table", className = "", children }: BookBut
   const { openBooking } = useBooking();
 
   return (
-    <button
+    <motion.button
       type="button"
       onClick={() => openBooking(type)}
       className={className || "btn-primary"}
+      whileHover={{ scale: 1.02, transition: { duration: 0.25 } }}
+      whileTap={{ scale: 0.98 }}
     >
       {children}
-    </button>
+    </motion.button>
   );
 }

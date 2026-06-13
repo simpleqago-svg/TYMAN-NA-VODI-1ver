@@ -60,10 +60,10 @@ void main(void) {
     uv += 0.09 * cos(i * vec2(0.1 + 0.01 * i, 0.8) + i * i + T * 0.38 + 0.1 * uv.x);
     vec2 p = uv;
     float d = length(p);
-    col += 0.00085 / max(d, 0.05) * (vec3(0.92, 0.91, 0.88) * (0.5 + 0.5 * sin(i + T * 0.2)));
+    col += 0.00085 / max(d, 0.05) * (vec3(0.78, 0.9, 0.84) * (0.5 + 0.5 * sin(i + T * 0.2)));
     float b = noise(i + p + bg * 1.731);
-    col += 0.0014 * b / length(max(p, vec2(b * p.x * 0.02, p.y))) * vec3(0.9, 0.89, 0.86);
-    col = mix(col, vec3(bg * 0.18, bg * 0.17, bg * 0.16), d);
+    col += 0.0014 * b / length(max(p, vec2(b * p.x * 0.02, p.y))) * vec3(0.72, 0.86, 0.8);
+    col = mix(col, vec3(bg * 0.14, bg * 0.2, bg * 0.17), d);
   }
 
   float lum = dot(col, vec3(0.299, 0.587, 0.114));
@@ -244,7 +244,7 @@ export function HookahSmokeBackground({ className = "" }: { className?: string }
     <div ref={containerRef} className={`absolute inset-0 ${className}`} aria-hidden="true">
       <canvas
         ref={canvasRef}
-        className="absolute inset-0 h-full w-full touch-none opacity-[0.28]"
+        className="absolute inset-0 h-full w-full touch-none opacity-[0.1]"
       />
     </div>
   );

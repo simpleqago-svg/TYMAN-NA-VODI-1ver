@@ -1,4 +1,4 @@
-import { Header, Footer, StickyBooking } from "@/components/layout/Shell";
+import { Header, Footer } from "@/components/layout/Shell";
 import { Hero } from "@/components/sections/Hero";
 import { WhySection } from "@/components/sections/WhySection";
 import { AtmosphereSection } from "@/components/sections/AtmosphereSection";
@@ -23,7 +23,6 @@ export default function Home() {
         <BookingTriggerSection />
       </main>
       <Footer />
-      <StickyBooking />
     </>
   );
 }

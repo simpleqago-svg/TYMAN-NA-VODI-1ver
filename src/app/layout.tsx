@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
+import { MotionConfig } from "framer-motion";
 import { Cormorant_Garamond, Onest } from "next/font/google";
 import { BookingProvider } from "@/components/booking/BookingProvider";
 import { BookingModal } from "@/components/booking/BookingModal";
+import { StickyBooking } from "@/components/layout/Shell";
 import { siteConfig } from "@/lib/site-config";
 import "./globals.css";
 
@@ -36,10 +38,13 @@ export default function RootLayout({
   return (
     <html lang="ru" className={`${cormorant.variable} ${onest.variable} h-full`}>
       <body className="min-h-full bg-background font-body text-foreground antialiased">
-        <BookingProvider>
-          {children}
-          <BookingModal />
-        </BookingProvider>
+        <MotionConfig reducedMotion="user">
+          <BookingProvider>
+            {children}
+            <BookingModal />
+            <StickyBooking />
+          </BookingProvider>
+        </MotionConfig>
         <div className="grain" aria-hidden="true" />
       </body>
     </html>
