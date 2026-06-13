@@ -7,6 +7,8 @@ const INTERSECTION_THRESHOLD = 0.12;
 
 export type BookCtaPlacement = "hero" | "floating" | "hidden";
 
+const isMinimalTheme = process.env.NEXT_PUBLIC_SITE_THEME === "minimal";
+
 export function useBookCtaPlacement(isModalOpen: boolean): BookCtaPlacement {
   const pathname = usePathname();
   const [heroVisible, setHeroVisible] = useState(pathname === "/");
@@ -65,6 +67,10 @@ export function useBookCtaPlacement(isModalOpen: boolean): BookCtaPlacement {
   }, [pathname]);
 
   if (isModalOpen || inPageCtaVisible) return "hidden";
+  if (isMinimalTheme) {
+    if (pathname === "/" && heroVisible) return "hero";
+    return "hidden";
+  }
   if (pathname === "/" && heroVisible) return "hero";
   return "floating";
 }

@@ -5,7 +5,7 @@ import { BookingProvider } from "@/components/booking/BookingProvider";
 import { BookingModal } from "@/components/booking/BookingModal";
 import { BookTableCta } from "@/components/booking/BookTableCta";
 import { siteConfig } from "@/lib/site-config";
-import { getSiteTheme, getThemeClassName } from "@/lib/site-theme";
+import { getSiteTheme, getThemeClassName, isMinimalTheme } from "@/lib/site-theme";
 import "./globals.css";
 import "./theme-dark.css";
 import "./theme-minimal.css";
@@ -40,6 +40,15 @@ export default function RootLayout({
 }>) {
   const theme = getSiteTheme();
   const themeClass = getThemeClassName(theme);
+  const minimal = isMinimalTheme();
+
+  const appShell = (
+    <BookingProvider>
+      {children}
+      <BookingModal />
+      {!minimal && <BookTableCta />}
+    </BookingProvider>
+  );
 
   return (
     <html
@@ -48,15 +57,9 @@ export default function RootLayout({
     >
       <body className="min-h-full bg-background font-body text-foreground antialiased">
         <MotionConfig reducedMotion="user">
-          <LayoutGroup id="book-cta">
-            <BookingProvider>
-              {children}
-              <BookingModal />
-              <BookTableCta />
-            </BookingProvider>
-          </LayoutGroup>
+          {minimal ? appShell : <LayoutGroup id="book-cta">{appShell}</LayoutGroup>}
         </MotionConfig>
-        <div className="grain" aria-hidden="true" />
+        {!minimal && <div className="grain" aria-hidden="true" />}
       </body>
     </html>
   );

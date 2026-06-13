@@ -7,6 +7,10 @@ export function getSiteTheme(): SiteTheme {
   return "default";
 }
 
+export function isMinimalTheme(): boolean {
+  return getSiteTheme() === "minimal";
+}
+
 export function getThemeClassName(theme: SiteTheme): string {
   if (theme === "dark") return "theme-dark";
   if (theme === "minimal") return "theme-minimal";

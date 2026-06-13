@@ -6,6 +6,8 @@ import { useBooking } from "@/components/booking/BookingProvider";
 import { useBookCtaPlacement } from "@/components/booking/useBookCtaPlacement";
 import { springSmooth } from "@/lib/motion";
 
+const isMinimal = process.env.NEXT_PUBLIC_SITE_THEME === "minimal";
+
 type BookCtaSlotProps = {
   variant: "hero" | "floating";
   className?: string;
@@ -15,6 +17,7 @@ export function BookCtaSlot({ variant, className = "" }: BookCtaSlotProps) {
   const { isOpen } = useBooking();
   const placement = useBookCtaPlacement(isOpen);
 
+  if (isMinimal && variant === "floating") return null;
   if (placement !== variant) return null;
 
   if (variant === "floating") {
@@ -36,6 +39,14 @@ export function BookCtaSlot({ variant, className = "" }: BookCtaSlotProps) {
     );
   }
 
+  if (isMinimal) {
+    return (
+      <div className={className}>
+        <BookButton className="btn-secondary">Забронировать стол</BookButton>
+      </div>
+    );
+  }
+
   return (
     <motion.div
       layout
@@ -49,5 +60,6 @@ export function BookCtaSlot({ variant, className = "" }: BookCtaSlotProps) {
 }
 
 export function BookTableCta() {
+  if (isMinimal) return null;
   return <BookCtaSlot variant="floating" />;
 }
