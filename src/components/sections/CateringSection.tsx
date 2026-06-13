@@ -7,7 +7,7 @@ export function CateringSection() {
   return (
     <section
       id="catering"
-      className="section-shell section-tone-base border-t border-border py-16 md:py-24"
+      className="section-shell section-tone-base py-16 md:py-24"
     >
       <div className="mx-auto max-w-6xl px-5 md:px-8">
         <div className="grid border border-border lg:grid-cols-2">

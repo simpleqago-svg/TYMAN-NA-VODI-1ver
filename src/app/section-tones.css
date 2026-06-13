@@ -1,14 +1,14 @@
 .section-shell {
   position: relative;
   isolation: isolate;
-  background: linear-gradient(
+  background-color: var(--section-bg-core, var(--section-bg-start));
+  background-image: linear-gradient(
     180deg,
-    var(--section-bg-start) 0%,
-    color-mix(in srgb, var(--section-bg-start) 72%, var(--background)) 14%,
-    color-mix(in srgb, var(--section-bg-start) 38%, var(--background)) 32%,
-    var(--background) 58%,
-    var(--background) 78%,
-    color-mix(in srgb, var(--background) 82%, var(--section-bg-end, var(--background))) 100%
+    var(--section-fade-in, var(--section-bg-start)) 0%,
+    var(--section-bg-start) 11%,
+    var(--section-bg-core, var(--section-bg-start)) 48%,
+    var(--section-bg-end) 89%,
+    var(--section-fade-out, var(--section-bg-end)) 100%
   );
 }
 
@@ -18,27 +18,11 @@
   position: absolute;
   inset: 0;
   background: radial-gradient(
-    ellipse 90% 50% at 50% -10%,
+    ellipse 100% 55% at 50% -5%,
     var(--brand-green-dim),
-    transparent 72%
+    transparent 78%
   );
-  opacity: var(--section-glow, 0.35);
-}
-
-.section-shell::after {
-  content: "";
-  pointer-events: none;
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: -1px;
-  height: 72px;
-  background: linear-gradient(
-    to bottom,
-    transparent,
-    color-mix(in srgb, var(--section-bg-end, var(--background)) 35%, transparent)
-  );
-  z-index: 0;
+  opacity: var(--section-glow, 0.22);
 }
 
 .section-shell > * {
@@ -46,31 +30,51 @@
   z-index: 1;
 }
 
+.section-after-hero {
+  --section-fade-in: #151c19;
+  --section-bg-start: #141917;
+}
+
+.section-after-catering {
+  --section-fade-in: #0f1311;
+  --section-bg-start: #121816;
+  --section-bg-core: #151c19;
+}
+
 .section-tone-light {
   --background: #151c19;
   --surface: #1c2522;
   --surface-elevated: #24302b;
-  --section-bg-start: #161d1a;
+  --section-fade-in: #151c19;
+  --section-bg-start: #151c19;
+  --section-bg-core: #151c19;
   --section-bg-end: #151c19;
-  --section-glow: 0.42;
+  --section-fade-out: #151c19;
+  --section-glow: 0.3;
 }
 
 .section-tone-base {
   --background: #121816;
   --surface: #18201c;
   --surface-elevated: #1e2823;
-  --section-bg-start: #151c19;
+  --section-fade-in: #131816;
+  --section-bg-start: #131816;
+  --section-bg-core: #121816;
   --section-bg-end: #101512;
-  --section-glow: 0.32;
+  --section-fade-out: #0f1311;
+  --section-glow: 0.24;
 }
 
 .section-tone-deep {
   --background: #0a0d0b;
   --surface: #0e1210;
   --surface-elevated: #121714;
-  --section-bg-start: #101512;
-  --section-bg-end: #0c0f0d;
-  --section-glow: 0.2;
+  --section-fade-in: #0f1311;
+  --section-bg-start: #0c0f0d;
+  --section-bg-core: #0a0d0b;
+  --section-bg-end: #0d100e;
+  --section-fade-out: #0e110f;
+  --section-glow: 0.14;
   --border: rgba(234, 236, 232, 0.06);
 }
 
@@ -78,33 +82,42 @@
   --background: #0e110f;
   --surface: #121714;
   --surface-elevated: #161b18;
-  --section-bg-start: #0c0f0d;
+  --section-fade-in: #0d100e;
+  --section-bg-start: #0e110f;
+  --section-bg-core: #0e110f;
   --section-bg-end: #101411;
-  --section-glow: 0.24;
+  --section-fade-out: #111613;
+  --section-glow: 0.18;
 }
 
 .section-tone-soft {
   --background: #111613;
   --surface: #161b18;
   --surface-elevated: #1a201c;
-  --section-bg-start: #0e110f;
-  --section-bg-end: #131816;
-  --section-glow: 0.28;
+  --section-fade-in: #0e110f;
+  --section-bg-start: #101412;
+  --section-bg-core: #111613;
+  --section-bg-end: #121816;
+  --section-fade-out: #131816;
+  --section-glow: 0.2;
 }
 
 .section-tone-vip {
   --background: #0b0e0c;
   --surface: #101412;
   --surface-elevated: #151a16;
-  --section-bg-start: #0e110f;
-  --section-bg-end: #101512;
-  --section-glow: 0.12;
+  --section-fade-in: #0d100e;
+  --section-bg-start: #0c0f0d;
+  --section-bg-core: #0b0e0c;
+  --section-bg-end: #101412;
+  --section-fade-out: #111613;
+  --section-glow: 0.1;
   --border: rgba(160, 103, 117, 0.14);
   --brand-green-dim: rgba(110, 63, 77, 0.12);
 }
 
 .vip-frame {
-  border: 1px solid color-mix(in srgb, var(--brand-burgundy-light) 28%, transparent);
+  border: 1px solid color-mix(in srgb, var(--brand-burgundy-light) 22%, transparent);
   background: linear-gradient(
     145deg,
     color-mix(in srgb, var(--brand-burgundy) 8%, var(--surface)) 0%,
@@ -112,8 +125,21 @@
     color-mix(in srgb, var(--brand-green) 6%, var(--surface)) 100%
   );
   box-shadow:
-    inset 0 1px 0 color-mix(in srgb, var(--brand-burgundy-light) 12%, transparent),
-    0 24px 60px rgba(0, 0, 0, 0.28);
+    inset 0 1px 0 color-mix(in srgb, var(--brand-burgundy-light) 10%, transparent),
+    0 24px 60px rgba(0, 0, 0, 0.22);
+}
+
+.section-continues {
+  background-image: linear-gradient(
+    180deg,
+    var(--section-bg-core, var(--section-bg-start)) 0%,
+    var(--section-bg-end) 88%,
+    var(--section-fade-out, var(--section-bg-end)) 100%
+  );
+}
+
+.section-continues::before {
+  opacity: calc(var(--section-glow, 0.22) * 0.55);
 }
 
 .atmosphere-scroll {

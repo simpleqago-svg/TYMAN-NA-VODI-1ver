@@ -1,5 +1,5 @@
-import { whyItems } from "@/lib/content";
-import { BookButton } from "@/components/booking/BookButton";
+import { whyItems, sectionActions } from "@/lib/content";
+import { BlockAction } from "@/components/ui/SectionCta";
 import { Reveal } from "@/components/ui/Reveal";
 import { Stagger, StaggerItem } from "@/components/ui/Stagger";
 import { WhyCardCarousel } from "@/components/sections/WhyCardCarousel";
@@ -72,7 +72,7 @@ function WhyIcon({ id }: { id: (typeof whyItems)[number]["id"] }) {
 
 export function WhySection() {
   return (
-    <section id="why" className="section-shell section-tone-base border-t border-border py-16 md:py-24">
+    <section id="why" className="section-shell section-tone-base section-after-hero py-16 md:py-24">
       <div className="mx-auto max-w-6xl px-5 md:px-8">
         <Reveal>
           <div className="max-w-2xl">
@@ -112,11 +112,12 @@ export function WhySection() {
           ))}
         </Stagger>
 
-        <Reveal className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-          <p className="max-w-md text-sm text-muted">
-            Узнали себя? Забронируйте стол — и вечер уже начнётся.
-          </p>
-          <BookButton className="btn-primary shrink-0">Забронировать стол</BookButton>
+        <Reveal>
+          <BlockAction
+            hint={sectionActions.why.hint}
+            href={sectionActions.why.href}
+            label={sectionActions.why.label}
+          />
         </Reveal>
       </div>
     </section>

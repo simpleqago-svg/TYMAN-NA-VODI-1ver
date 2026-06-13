@@ -241,6 +241,15 @@ body {
   padding-top: 0.15rem;
 }
 
+.floating-book-cta .btn-primary {
+  border-color: color-mix(in srgb, var(--brand-green-light) 45%, transparent);
+  background: color-mix(in srgb, var(--background) 72%, var(--brand-green) 28%);
+  backdrop-filter: blur(14px);
+  box-shadow:
+    0 10px 40px rgba(0, 0, 0, 0.38),
+    0 0 28px var(--brand-green-glow);
+}
+
 @media (hover: hover) {
   main h2,
   main h3,

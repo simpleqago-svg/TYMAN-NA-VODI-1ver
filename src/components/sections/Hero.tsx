@@ -5,8 +5,8 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import AnimatedTextCycle from "@/components/ui/animated-text-cycle";
 import { HookahSmokeBackground } from "@/components/ui/animated-shader-hero";
-import { BookButton } from "@/components/booking/BookButton";
-import { heroCycleWords, heroSlides } from "@/lib/content";
+import { SectionCta } from "@/components/ui/SectionCta";
+import { heroCycleWords, heroSlides, sectionActions } from "@/lib/content";
 import { easeInOutSmooth, staggerContainer } from "@/lib/motion";
 
 const SLIDE_INTERVAL = 5500;
@@ -68,12 +68,12 @@ export function Hero() {
         >
           <motion.h1
             variants={{
-              hidden: { opacity: 0, y: 36, filter: "blur(10px)" },
+              hidden: { opacity: 0, y: 28, filter: "blur(6px)" },
               visible: {
                 opacity: 1,
                 y: 0,
                 filter: "blur(0px)",
-                transition: { duration: 1, ease: easeInOutSmooth },
+                transition: { duration: 1.1, ease: easeInOutSmooth },
               },
             }}
             className="font-display text-[2.5rem] font-light leading-none tracking-[-0.03em] text-foreground sm:text-5xl md:text-6xl lg:text-7xl"
@@ -114,7 +114,11 @@ export function Hero() {
             }}
             className="mt-12"
           >
-            <BookButton className="btn-primary">Забронировать стол</BookButton>
+            <SectionCta
+              href={sectionActions.hero.href}
+              label={sectionActions.hero.label}
+              variant="secondary"
+            />
           </motion.div>
         </motion.div>
       </div>

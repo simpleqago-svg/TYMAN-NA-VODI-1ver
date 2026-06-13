@@ -363,6 +363,32 @@ export const bookingTriggerContent = {
   title: "Лучше бронировать заранее",
   subtitle: "Ограниченное количество мест",
   ctaLabel: "Забронировать стол",
+  contactsLabel: "Контакты и адрес",
+} as const;
+
+export const sectionActions = {
+  hero: { href: "#why", label: "Почему сюда" },
+  why: {
+    hint: "Посмотрите, как выглядит вечер в lounge.",
+    href: "#atmosphere",
+    label: "Смотреть атмосферу",
+  },
+  atmosphere: {
+    hint: "Нужна приватность на компанию или праздник?",
+    href: "#vip",
+    label: "VIP-комната",
+  },
+  vip: {
+    hint: "Хотите заранее выбрать, что заказать?",
+    href: "#menu-preview",
+    label: "Посмотреть меню",
+  },
+  reviews: {
+    hint: "Планируете мероприятие или корпоратив?",
+    href: "#catering",
+    label: "Кейтеринг и корпоративы",
+  },
+  booking: { href: "#contacts", label: "Контакты и адрес" },
 } as const;
 
 export const menuPageContent = {
@@ -373,7 +399,6 @@ export const menuPageContent = {
   pdfOpenLabel: "Открыть PDF",
   pdfDownloadLabel: "Скачать PDF",
   pdfNote: "Цены ориентировочные. Актуальное наличие уточняйте у персонала.",
-  bookCta: "Забронировать стол",
   backLabel: "На главную",
 } as const;
 

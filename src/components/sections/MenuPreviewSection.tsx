@@ -8,7 +8,7 @@ export function MenuPreviewSection() {
   return (
     <section
       id="menu-preview"
-      className="section-shell section-tone-soft border-t border-border py-16 md:py-24"
+      className="section-shell section-tone-soft py-16 md:py-24"
     >
       <div className="mx-auto max-w-6xl px-5 md:px-8">
         <Reveal>

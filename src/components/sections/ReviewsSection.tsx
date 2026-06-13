@@ -1,5 +1,6 @@
-import { reviews } from "@/lib/content";
+import { reviews, sectionActions } from "@/lib/content";
 import { Reveal } from "@/components/ui/Reveal";
+import { BlockAction } from "@/components/ui/SectionCta";
 import { Stagger, StaggerItem } from "@/components/ui/Stagger";
 
 function StarRating({ rating }: { rating: number }) {
@@ -26,7 +27,7 @@ function reviewGridClass(index: number) {
 
 export function ReviewsSection() {
   return (
-    <section id="reviews" className="section-shell section-tone-soft border-t border-border py-16 md:py-24">
+    <section id="reviews" className="section-shell section-tone-soft section-continues py-16 md:py-24">
       <div className="mx-auto max-w-6xl px-5 md:px-8">
         <Reveal>
           <div className="max-w-xl">
@@ -79,6 +80,14 @@ export function ReviewsSection() {
             );
           })}
         </Stagger>
+
+        <Reveal>
+          <BlockAction
+            hint={sectionActions.reviews.hint}
+            href={sectionActions.reviews.href}
+            label={sectionActions.reviews.label}
+          />
+        </Reveal>
       </div>
     </section>
   );

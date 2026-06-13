@@ -1,44 +1,44 @@
-/** Shared motion tokens — Framer-like smooth reveals & transitions */
+/** Shared motion tokens — soft Framer-like motion */
 
 export const easeOutExpo = [0.16, 1, 0.3, 1] as const;
-export const easeInOutSmooth = [0.22, 1, 0.36, 1] as const;
+export const easeInOutSmooth = [0.25, 0.1, 0.25, 1] as const;
 export const easeOutSharp = [0.4, 0, 0.2, 1] as const;
 
 export const smoothTween = {
-  duration: 0.85,
-  ease: easeOutExpo,
+  duration: 1.05,
+  ease: easeInOutSmooth,
 } as const;
 
 export const quickTween = {
-  duration: 0.45,
+  duration: 0.55,
   ease: easeInOutSmooth,
 } as const;
 
 export const springSmooth = {
   type: "spring" as const,
-  stiffness: 120,
+  stiffness: 70,
   damping: 22,
-  mass: 0.92,
+  mass: 1.05,
 };
 
 export const springSnappy = {
   type: "spring" as const,
-  stiffness: 180,
-  damping: 20,
-  mass: 0.85,
+  stiffness: 120,
+  damping: 24,
+  mass: 0.95,
 };
 
 export const viewportOnce = {
   once: true,
-  amount: 0.18,
-  margin: "0px 0px -8% 0px" as const,
+  amount: 0.12,
+  margin: "0px 0px -5% 0px" as const,
 };
 
 export const fadeBlurUp = {
   hidden: {
     opacity: 0,
-    y: 28,
-    filter: "blur(8px)",
+    y: 18,
+    filter: "blur(5px)",
   },
   visible: {
     opacity: 1,
@@ -49,11 +49,11 @@ export const fadeBlurUp = {
 };
 
 export const fadeBlurUpReduced = {
-  hidden: { opacity: 0, y: 12 },
+  hidden: { opacity: 0, y: 10 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.35, ease: easeOutExpo },
+    transition: { duration: 0.4, ease: easeOutExpo },
   },
 };
 
@@ -61,13 +61,13 @@ export const staggerContainer = {
   hidden: {},
   visible: {
     transition: {
-      staggerChildren: 0.1,
-      delayChildren: 0.06,
+      staggerChildren: 0.14,
+      delayChildren: 0.08,
     },
   },
 };
 
 export const crossfade = {
-  duration: 0.65,
+  duration: 0.75,
   ease: easeInOutSmooth,
 } as const;

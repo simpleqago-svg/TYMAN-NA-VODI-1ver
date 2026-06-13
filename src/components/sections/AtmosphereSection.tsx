@@ -1,11 +1,13 @@
+import { sectionActions } from "@/lib/content";
 import { Reveal } from "@/components/ui/Reveal";
+import { BlockAction } from "@/components/ui/SectionCta";
 import { AtmosphereGallery } from "@/components/sections/AtmosphereGallery";
 
 export function AtmosphereSection() {
   return (
     <section
       id="atmosphere"
-      className="section-shell section-tone-deep border-t border-border py-16 md:py-24"
+      className="section-shell section-tone-deep py-16 md:py-24"
     >
       <div className="mx-auto max-w-6xl px-5 md:px-8">
         <Reveal>
@@ -23,6 +25,14 @@ export function AtmosphereSection() {
 
         <Reveal delay={60}>
           <AtmosphereGallery />
+        </Reveal>
+
+        <Reveal delay={90}>
+          <BlockAction
+            hint={sectionActions.atmosphere.hint}
+            href={sectionActions.atmosphere.href}
+            label={sectionActions.atmosphere.label}
+          />
         </Reveal>
       </div>
     </section>

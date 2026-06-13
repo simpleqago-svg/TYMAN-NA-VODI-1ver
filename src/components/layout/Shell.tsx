@@ -2,10 +2,11 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { siteConfig } from "@/lib/site-config";
 import { BookButton } from "@/components/booking/BookButton";
 import { useBooking } from "@/components/booking/BookingProvider";
+import { useFloatingBookCta } from "@/components/booking/useFloatingBookCta";
 import { Reveal } from "@/components/ui/Reveal";
 import { springSmooth } from "@/lib/motion";
 
@@ -21,9 +22,9 @@ export function Header() {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-40 border-b transition-[background-color,border-color,backdrop-filter] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+      className={`fixed inset-x-0 top-0 z-40 border-b transition-[background-color,border-color,backdrop-filter] duration-700 ease-[cubic-bezier(0.25,0.1,0.25,1)] ${
         scrolled
-          ? "border-border-green bg-background/90 backdrop-blur-md"
+          ? "border-border-green/40 bg-background/88 backdrop-blur-md"
           : "border-transparent bg-transparent"
       }`}
     >
@@ -48,10 +49,6 @@ export function Header() {
             Instagram
           </a>
         </nav>
-
-        <BookButton className="btn-primary shrink-0 px-4 py-2.5 text-[0.65rem]">
-          Забронировать стол
-        </BookButton>
       </div>
     </header>
   );
@@ -59,27 +56,35 @@ export function Header() {
 
 export function StickyBooking() {
   const { isOpen } = useBooking();
-
-  if (isOpen) return null;
+  const showFloating = useFloatingBookCta(isOpen);
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20, filter: "blur(6px)" }}
-      animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-      transition={{ ...springSmooth, delay: 0.6 }}
-      className="sticky-booking pointer-events-none fixed bottom-0 right-0 z-40 p-4 pr-5 pb-[max(1rem,env(safe-area-inset-bottom))] sm:pr-7 md:pr-10 lg:pr-14"
-      aria-label="Быстрое бронирование"
-    >
-      <BookButton className="btn-primary pointer-events-auto w-auto min-w-[220px] max-w-[calc(100vw-2.5rem)] px-5 py-3 text-[0.68rem] shadow-[0_8px_32px_rgba(0,0,0,0.45),0_0_24px_var(--brand-green-glow)] sm:min-w-[240px] md:min-w-[260px]">
-        Забронировать стол
-      </BookButton>
-    </motion.div>
+    <AnimatePresence>
+      {showFloating ? (
+        <motion.div
+          key="floating-book-cta"
+          initial={{ opacity: 0, y: 20, scale: 0.94, filter: "blur(6px)" }}
+          animate={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
+          exit={{ opacity: 0, y: 14, scale: 0.96, filter: "blur(4px)" }}
+          transition={springSmooth}
+          className="floating-book-cta pointer-events-none fixed z-40 bottom-[max(1.25rem,env(safe-area-inset-bottom))] right-5 sm:right-7 md:bottom-7 md:right-10 lg:right-14"
+          aria-label="Быстрое бронирование"
+        >
+          <BookButton
+            floating
+            className="btn-primary pointer-events-auto min-w-[210px] px-5 py-3 text-[0.68rem] sm:min-w-[230px] md:min-w-[250px]"
+          >
+            Забронировать стол
+          </BookButton>
+        </motion.div>
+      ) : null}
+    </AnimatePresence>
   );
 }
 
 export function Footer() {
   return (
-    <footer id="contacts" className="section-shell section-tone-light border-t border-border pb-28 md:pb-24">
+    <footer id="contacts" className="section-shell section-tone-light section-continues pb-28 md:pb-24">
       <div className="mx-auto grid max-w-6xl gap-16 px-5 py-20 md:grid-cols-2 md:px-8">
         <Reveal>
           <div>
@@ -125,7 +130,7 @@ export function Footer() {
         </Reveal>
 
         <Reveal delay={80}>
-          <div className="overflow-hidden border border-border">
+          <div className="overflow-hidden border border-border/60">
           <iframe
             title="Карта Tyman na Vodi"
             src={siteConfig.mapEmbedUrl}

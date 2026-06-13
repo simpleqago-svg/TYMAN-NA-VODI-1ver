@@ -1,5 +1,6 @@
-import { vipContent, vipFeatures } from "@/lib/content";
+import { vipContent, vipFeatures, sectionActions } from "@/lib/content";
 import { BookButton } from "@/components/booking/BookButton";
+import { BlockAction } from "@/components/ui/SectionCta";
 import { Reveal } from "@/components/ui/Reveal";
 import { VipGallery } from "@/components/sections/VipGallery";
 
@@ -7,7 +8,7 @@ export function VipSection() {
   return (
     <section
       id="vip"
-      className="section-shell section-tone-vip border-t border-brand-burgundy/20 py-16 md:py-24"
+      className="section-shell section-tone-vip py-16 md:py-24"
     >
       <div className="mx-auto max-w-6xl px-5 md:px-8">
         <div className="vip-frame p-5 md:p-8">
@@ -57,6 +58,14 @@ export function VipSection() {
               </div>
             </Reveal>
           </div>
+
+          <Reveal delay={120}>
+            <BlockAction
+              hint={sectionActions.vip.hint}
+              href={sectionActions.vip.href}
+              label={sectionActions.vip.label}
+            />
+          </Reveal>
         </div>
       </div>
     </section>

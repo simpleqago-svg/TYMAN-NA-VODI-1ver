@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { menuPageContent, menuPageSections } from "@/lib/content";
 import { siteConfig } from "@/lib/site-config";
-import { BookButton } from "@/components/booking/BookButton";
 import { Reveal } from "@/components/ui/Reveal";
 import { Stagger, StaggerItem } from "@/components/ui/Stagger";
 
@@ -125,14 +124,9 @@ export function MenuPageContent() {
       </Stagger>
 
       <Reveal className="mt-16 border-t border-border pt-10">
-        <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-between">
-          <p className="max-w-xs text-sm text-muted">
-            Готовы прийти? Забронируйте стол заранее.
-          </p>
-          <BookButton className="btn-primary shrink-0">
-            {menuPageContent.bookCta}
-          </BookButton>
-        </div>
+        <Link href="/" className="btn-secondary cursor-pointer">
+          ← {menuPageContent.backLabel}
+        </Link>
       </Reveal>
     </div>
   );
