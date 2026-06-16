@@ -1,5 +1,8 @@
 import { Header, Footer } from "@/components/layout/Shell";
+import { LovableFooter } from "@/components/lovable/LovableFooter";
+import { LovableHeader } from "@/components/lovable/LovableHeader";
 import { MenuPageContent } from "@/components/menu/MenuPageContent";
+import { isLovableTheme } from "@/lib/site-theme";
 
 export const metadata = {
   title: "Меню — Tyman na Vodi",
@@ -8,6 +11,20 @@ export const metadata = {
 };
 
 export default function MenuPage() {
+  if (isLovableTheme()) {
+    return (
+      <div className="min-h-screen bg-background text-foreground">
+        <LovableHeader />
+        <main className="min-h-[70svh] scroll-mt-20 pt-28 pb-28 md:pb-32">
+          <div className="mx-auto max-w-7xl px-6 lg:px-10">
+            <MenuPageContent />
+          </div>
+        </main>
+        <LovableFooter />
+      </div>
+    );
+  }
+
   return (
     <>
       <Header />

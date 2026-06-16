@@ -1,14 +1,20 @@
 import type { Metadata } from "next";
 import { MotionConfig, LayoutGroup } from "framer-motion";
-import { Cormorant_Garamond, Onest } from "next/font/google";
+import { Cormorant_Garamond, Manrope, Onest } from "next/font/google";
 import { BookingProvider } from "@/components/booking/BookingProvider";
 import { BookingModal } from "@/components/booking/BookingModal";
 import { BookTableCta } from "@/components/booking/BookTableCta";
 import { siteConfig } from "@/lib/site-config";
-import { getSiteTheme, getThemeClassName, isMinimalTheme } from "@/lib/site-theme";
+import {
+  getSiteTheme,
+  getThemeClassName,
+  isLovableTheme,
+  isMinimalTheme,
+} from "@/lib/site-theme";
 import "./globals.css";
 import "./theme-dark.css";
 import "./theme-minimal.css";
+import "./theme-lovable.css";
 
 const cormorant = Cormorant_Garamond({
   variable: "--font-cormorant",
@@ -18,6 +24,12 @@ const cormorant = Cormorant_Garamond({
 
 const onest = Onest({
   variable: "--font-onest",
+  subsets: ["latin", "cyrillic"],
+  weight: ["300", "400", "500", "600"],
+});
+
+const manrope = Manrope({
+  variable: "--font-manrope",
   subsets: ["latin", "cyrillic"],
   weight: ["300", "400", "500", "600"],
 });
@@ -41,25 +53,33 @@ export default function RootLayout({
   const theme = getSiteTheme();
   const themeClass = getThemeClassName(theme);
   const minimal = isMinimalTheme();
+  const lovable = isLovableTheme();
+  const skipMorphCta = minimal || lovable;
 
   const appShell = (
     <BookingProvider>
       {children}
       <BookingModal />
-      {!minimal && <BookTableCta />}
+      {!skipMorphCta && <BookTableCta />}
     </BookingProvider>
   );
+
+  const fontVars = lovable
+    ? `${cormorant.variable} ${manrope.variable}`
+    : `${cormorant.variable} ${onest.variable}`;
 
   return (
     <html
       lang="ru"
-      className={`${cormorant.variable} ${onest.variable} h-full${themeClass ? ` ${themeClass}` : ""}`}
+      className={`${fontVars} h-full${themeClass ? ` ${themeClass}` : ""}`}
     >
-      <body className="min-h-full bg-background font-body text-foreground antialiased">
+      <body
+        className={`min-h-full bg-background text-foreground antialiased ${lovable ? "font-[family-name:var(--font-manrope)]" : "font-body"}`}
+      >
         <MotionConfig reducedMotion="user">
-          {minimal ? appShell : <LayoutGroup id="book-cta">{appShell}</LayoutGroup>}
+          {skipMorphCta ? appShell : <LayoutGroup id="book-cta">{appShell}</LayoutGroup>}
         </MotionConfig>
-        {!minimal && <div className="grain" aria-hidden="true" />}
+        {!minimal && !lovable && <div className="grain" aria-hidden="true" />}
       </body>
     </html>
   );

@@ -61,6 +61,10 @@
   --color-gold: var(--accent);
   --color-gold-light: var(--accent);
   --color-gold-dim: var(--accent-dim);
+  --color-burgundy: var(--burgundy, var(--brand-burgundy));
+  --color-burgundy-hover: var(--burgundy-hover, var(--brand-burgundy-light));
+  --color-accent-gold: var(--accent-gold, var(--accent));
+  --color-surface-vip: var(--surface-vip, var(--surface));
   --font-display: var(--font-cormorant);
   --font-body: var(--font-onest);
 }
